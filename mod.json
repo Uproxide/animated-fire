@@ -1,0 +1,48 @@
+{
+	"geode": "3.2.0",
+	"gd": {
+		"win": "2.206",
+		"android": "2.206",
+		"mac": "2.206",
+		"ios": "2.206"
+	},
+	"id": "uproxide.animated_fire",
+	"name": "Animated Fire",
+	"version": "v1.0.0",
+	"developers": [
+		"Uproxide",
+		"Brift"
+	],
+	"description": "Makes the Epic, Legendary and Mythic fires animated!",
+	"resources": {
+		"spritesheets": {
+			"EpicSheet": [
+				"resources/EpicSheet/*.png"
+			],
+			"LegendarySheet": [
+				"resources/LegendarySheet/*.png"
+			],
+			"MythicSheet": [
+				"resources/MythicSheet/*.png"
+			]
+		},
+		"files": [
+			"resources/example.png"
+		]
+	},
+	"dependencies": [
+		{
+			"id": "geode.node-ids",
+			"version": ">=1.12.1",
+			"importance": "required"
+		}
+	],
+	"tags": [
+		"interface", "enhancement", "customization"
+	], 
+	"links": {
+		"community": "https://discord.gg/uproxide-s-little-land-1204580412299542608",
+		"homepage": "https://uproxide.xyz",
+		"source": "https://github.com/uproxide/animated-fire"
+	}
+}
