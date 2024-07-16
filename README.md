@@ -8,7 +8,7 @@
    </p>
 </div>
 
-![image](resource/example.png&scale:0.5)
+![image](resource/example.png)
 
 # Credits
 - Uproxide
