@@ -46,6 +46,7 @@ class $modify(DailyLevelNode) {
         if (!DailyLevelNode::init(level, page, idk)) return false;
 
         auto remindMeToNameThis = cocos2d::extension::CCScale9Sprite::create("square02b_small.png");
+        remindMeToNameThis->setID("hide-spr"_spr);
 
         switch(page->m_type) {
             case GJTimedLevelType::Daily:
