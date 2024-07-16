@@ -1,4 +1,5 @@
 #include <Geode/Geode.hpp>
+#include <random>
 
 #include "./FireSprite.hpp"
 
@@ -14,6 +15,11 @@ FireSprite* FireSprite::create(int p0) {
 
 bool FireSprite::init(int p0) {
     fireType = p0;
+    
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 7);
+    m_currentFrame = dis(gen);
 
     this->schedule(schedule_selector(FireSprite::fireAnimation), (1/12.f));
 
