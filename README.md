@@ -13,4 +13,5 @@
 # Credits
 - Uproxide
 - Brift
+- ShineUA (Clipping Node on Level Cell)
 - Cooper (help with sprite animations)
