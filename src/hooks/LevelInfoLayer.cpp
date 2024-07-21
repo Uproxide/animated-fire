@@ -57,4 +57,34 @@ class $modify(LevelInfoLayer) {
             }
         }
     }
+
+    void likedItem(LikeItemType p0, int p1, bool p2) {
+        LevelInfoLayer::likedItem(p0, p1, p2);
+
+        auto fireSprite = m_difficultySprite->getChildByID("animated-fire-sprite"_spr);
+
+        if (fireSprite) {
+            if (m_level->m_isEpic == 1) {
+                fireSprite->setPositionY(fireSprite->getPositionY() + 16.875);
+            } else {
+                fireSprite->setPositionY(fireSprite->getPositionY() + 15.875);
+            }
+        } else {
+            if (m_level->m_isEpic != 0) {
+                auto epicFire = as<CCSprite*>(m_difficultySprite->getChildren()->objectAtIndex(0));
+                epicFire->setVisible(false);
+
+                auto fireSpr = FireSprite::create(m_level->m_isEpic);
+                m_difficultySprite->addChild(fireSpr);
+                fireSpr->setPosition(epicFire->getPosition());
+                if (m_level->m_isEpic == 1) {
+                    fireSpr->setPositionY(fireSpr->getPositionY() + 16.875);
+                } else {
+                    fireSpr->setPositionY(fireSpr->getPositionY() + 15.875);
+                }
+                fireSpr->setZOrder(-1);
+                fireSpr->setID("animated-fire-sprite"_spr);
+            }
+        }
+    }
 };
