@@ -45,8 +45,7 @@ class $modify(MyLevelCell, LevelCell) {
                 m_fields->m_fireSpr->setID("animated-fire-sprite"_spr);
                 m_fields->m_fireSpr->setAnchorPoint({0, 0});
 
-                auto rect = CCLayerColor::create({0, 0, 0, 255}, m_fields->m_fireSpr->getContentWidth(), 67);
-                auto clippingNode = CCClippingNode::create(rect);
+                auto clippingNode = CCClippingNode::create(CCLayerColor::create({0, 0, 0, 255}, m_fields->m_fireSpr->getContentWidth(), m_fields->m_fireSpr->getContentHeight()));
                 clippingNode->setContentSize(m_fields->m_fireSpr->getContentSize());
                 clippingNode->setPosition(epicFire->getPosition());
                 clippingNode->setScale(epicFire->getScale());
@@ -55,6 +54,11 @@ class $modify(MyLevelCell, LevelCell) {
                     clippingNode->setPositionY(clippingNode->getPositionY() + 16.875);
                 } else {
                     clippingNode->setPositionY(clippingNode->getPositionY() + 15.875);
+                }
+                
+                if(auto bgNode = as<CCScale9Sprite*>(this->getParent()->getChildByID("background"))) {
+                    auto rect = CCLayerColor::create({0, 0, 0, 255}, m_fields->m_fireSpr->getContentWidth(), m_fields->m_fireSpr->getContentHeight() + (bgNode->getContentHeight() - ((difficultyNode->getPositionY() + clippingNode->getPositionY() + clippingNode->getContentHeight() / 2) + 11.f + 2.625f)));
+                    clippingNode->setStencil(rect);
                 }
 
                 clippingNode->setZOrder(-1);
@@ -89,7 +93,6 @@ class $modify(MyLevelCell, LevelCell) {
                 m_fields->m_fireSpr->setID("animated-fire-sprite"_spr);
             }
         }
-
     }
 };
 
