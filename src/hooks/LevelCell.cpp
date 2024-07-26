@@ -1,6 +1,10 @@
+#include "Geode/cocos/cocoa/CCObject.h"
+#include "Geode/cocos/misc_nodes/CCClippingNode.h"
+#include "Geode/ui/Notification.hpp"
 #include <Geode/Geode.hpp>
 #include <Geode/modify/LevelCell.hpp>
 #include <Geode/modify/DailyLevelNode.hpp>
+#include <fmt/format.h>
 
 using namespace geode::prelude;
 
@@ -36,6 +40,8 @@ class $modify(MyLevelCell, LevelCell) {
 
 		if (difficultyNode) {
 			GJDifficultySprite* difficultySpr = as<GJDifficultySprite*>(difficultyNode->getChildByID("difficulty-sprite"));
+            // float x, y, z;
+            // log::info("x: {}, y: {}, z: {}", x, y, z);
 
             if (m_fields->m_level->m_isEpic != 0) {
                 auto epicFire = as<CCSprite*>(difficultySpr->getChildren()->objectAtIndex(0));
@@ -57,7 +63,8 @@ class $modify(MyLevelCell, LevelCell) {
                 }
                 
                 if(auto bgNode = as<CCScale9Sprite*>(this->getParent()->getChildByID("background"))) {
-                    auto rect = CCLayerColor::create({0, 0, 0, 255}, m_fields->m_fireSpr->getContentWidth(), m_fields->m_fireSpr->getContentHeight() + (bgNode->getContentHeight() - ((difficultyNode->getPositionY() + clippingNode->getPositionY() + clippingNode->getContentHeight() / 2) + 11.f + 2.625f)));
+                    auto rect = CCLayerColor::create({0, 0, 0, 255}, m_fields->m_fireSpr->getContentWidth(), m_fields->m_fireSpr->getContentHeight() + bgNode->getContentHeight() - (difficultyNode->getPositionY() + difficultySpr->getPositionY() + (clippingNode->getPositionY() - difficultySpr->getContentHeight() / 2) + clippingNode->getContentHeight() / 2 + 11.f));
+                    log::info("rect-height: {}", rect->getContentHeight());
                     clippingNode->setStencil(rect);
                 }
 
@@ -95,41 +102,3 @@ class $modify(MyLevelCell, LevelCell) {
         }
     }
 };
-
-// class $modify(DailyLevelNode) {
-//     static void onModify(auto& self) {
-//         if (!self.setHookPriority("DailyLevelNode::init", 2000000)) {
-//             log::warn("uh oh");
-//         }
-//     }
-
-//     bool init(GJGameLevel* level, DailyLevelPage* page, bool idk) {
-//         if (!DailyLevelNode::init(level, page, idk)) return false;
-
-//         auto remindMeToNameThis = cocos2d::extension::CCScale9Sprite::create("square02b_small.png");
-//         remindMeToNameThis->setID("hide-spr"_spr);
-
-//         switch(page->m_type) {
-//             case GJTimedLevelType::Daily:
-//                 remindMeToNameThis->setColor(ccc3(153, 85, 51));
-//                 break;
-//             case GJTimedLevelType::Weekly:
-//                 remindMeToNameThis->setColor(ccc3(84, 84, 84));
-//                 break;
-//             // case GJTimedLevelType::Event:
-//                 // break;
-//             default:
-//                 break;
-//         }
-
-//         if (Loader::get()->isModLoaded("cdc.level_thumbnails")) {
-//             this->addChild(remindMeToNameThis);
-//             remindMeToNameThis->setPositionY(remindMeToNameThis->getPositionY() + 78);
-//             remindMeToNameThis->setPositionX(this->getPositionX() - 156);
-//             remindMeToNameThis->setZOrder(5);
-//             remindMeToNameThis->setContentWidth(60);
-//         }
-        
-//         return true;
-//     }
-// };
