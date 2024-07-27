@@ -10,12 +10,10 @@ class $modify(MyLevelCell, LevelCell) {
     struct Fields {
         SEL_SCHEDULE m_dailyNodeCheck;
         FireSprite* m_fireSpr;
-        GJGameLevel* m_level;
     };
 
     void loadFromLevel(GJGameLevel* level) {
         LevelCell::loadFromLevel(level);
-        m_fields->m_level = level;
         m_fields->m_dailyNodeCheck = schedule_selector(MyLevelCell::checkDailyNode);
         schedule(m_fields->m_dailyNodeCheck);
     }
@@ -37,11 +35,12 @@ class $modify(MyLevelCell, LevelCell) {
 		if (difficultyNode) {
 			GJDifficultySprite* difficultySpr = as<GJDifficultySprite*>(difficultyNode->getChildByID("difficulty-sprite"));
 
-            if (m_fields->m_level->m_isEpic != 0) {
+            auto state = difficultySpr->m_featureState;
+            if (state != GJFeatureState::None && state != GJFeatureState::Featured) {
                 auto epicFire = as<CCSprite*>(difficultySpr->getChildren()->objectAtIndex(0));
                 epicFire->setVisible(false);
 
-                m_fields->m_fireSpr = FireSprite::create(m_fields->m_level->m_isEpic);
+                m_fields->m_fireSpr = FireSprite::create((int)state - 1);
                 m_fields->m_fireSpr->setID("animated-fire-sprite"_spr);
                 m_fields->m_fireSpr->setAnchorPoint({0, 0});
 
@@ -50,7 +49,7 @@ class $modify(MyLevelCell, LevelCell) {
                 clippingNode->setPosition(epicFire->getPosition());
                 clippingNode->setScale(epicFire->getScale());
 
-                if (m_fields->m_level->m_isEpic == 1) {
+                if (state == GJFeatureState::Epic) {
                     clippingNode->setPositionY(clippingNode->getPositionY() + 16.875);
                 } else {
                     clippingNode->setPositionY(clippingNode->getPositionY() + 15.875);
@@ -76,15 +75,16 @@ class $modify(MyLevelCell, LevelCell) {
 		if (difficultyNode) {
 			GJDifficultySprite* difficultySpr = as<GJDifficultySprite*>(difficultyNode->getChildByID("difficulty-sprite"));
 
-            if (m_fields->m_level->m_isEpic != 0) {
+            auto state = difficultySpr->m_featureState;
+            if (state != GJFeatureState::None && state != GJFeatureState::Featured) {
                 auto epicFire = as<CCSprite*>(difficultySpr->getChildren()->objectAtIndex(0));
                 epicFire->setVisible(false);
 
-                m_fields->m_fireSpr = FireSprite::create(m_fields->m_level->m_isEpic);
+                m_fields->m_fireSpr = FireSprite::create((int)state - 1);
                 difficultySpr->addChild(m_fields->m_fireSpr);
                 m_fields->m_fireSpr->setPosition(epicFire->getPosition());
                 m_fields->m_fireSpr->setScale(epicFire->getScale());
-                if (m_fields->m_level->m_isEpic == 1) {
+                if (state == GJFeatureState::Epic) {
                     m_fields->m_fireSpr->setPositionY(m_fields->m_fireSpr->getPositionY() + 16.875);
                 } else {
                     m_fields->m_fireSpr->setPositionY(m_fields->m_fireSpr->getPositionY() + 15.875);

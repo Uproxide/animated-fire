@@ -7,6 +7,7 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 project(AnimatedFire VERSION 1.0.0)
 
 add_library(${PROJECT_NAME} SHARED
+    src/hooks/GJDifficultySprite.cpp
     src/hooks/LevelCell.cpp
     src/hooks/LevelInfoLayer.cpp
     src/ui/FireSprite.cpp
