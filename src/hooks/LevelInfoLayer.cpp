@@ -33,21 +33,16 @@ class $modify(LevelInfoLayer) {
 
         auto fireSprite = m_difficultySprite->getChildByID("animated-fire-sprite"_spr);
 
-        if (fireSprite) {
-            if (level->m_isEpic == 1) {
-                fireSprite->setPositionY(fireSprite->getPositionY() + 16.875);
-            } else {
-                fireSprite->setPositionY(fireSprite->getPositionY() + 15.875);
-            }
-        } else {
-            if (level->m_isEpic != 0) {
+        if (!fireSprite) {
+            auto state = m_difficultySprite->m_featureState;
+            if (state != GJFeatureState::None && state != GJFeatureState::Featured) {
                 auto epicFire = as<CCSprite*>(m_difficultySprite->getChildren()->objectAtIndex(0));
                 epicFire->setVisible(false);
 
-                auto fireSpr = FireSprite::create(level->m_isEpic);
+                auto fireSpr = FireSprite::create((int)state - 1);
                 m_difficultySprite->addChild(fireSpr);
                 fireSpr->setPosition(epicFire->getPosition());
-                if (level->m_isEpic == 1) {
+                if (state == GJFeatureState::Epic) {
                     fireSpr->setPositionY(fireSpr->getPositionY() + 16.875);
                 } else {
                     fireSpr->setPositionY(fireSpr->getPositionY() + 15.875);
@@ -63,21 +58,16 @@ class $modify(LevelInfoLayer) {
 
         auto fireSprite = m_difficultySprite->getChildByID("animated-fire-sprite"_spr);
 
-        if (fireSprite) {
-            if (m_level->m_isEpic == 1) {
-                fireSprite->setPositionY(fireSprite->getPositionY() + 16.875);
-            } else {
-                fireSprite->setPositionY(fireSprite->getPositionY() + 15.875);
-            }
-        } else {
-            if (m_level->m_isEpic != 0) {
+        if (!fireSprite) {
+            auto state = m_difficultySprite->m_featureState;
+            if (state != GJFeatureState::None && state != GJFeatureState::Featured) {
                 auto epicFire = as<CCSprite*>(m_difficultySprite->getChildren()->objectAtIndex(0));
                 epicFire->setVisible(false);
 
-                auto fireSpr = FireSprite::create(m_level->m_isEpic);
+                auto fireSpr = FireSprite::create((int)state - 1);
                 m_difficultySprite->addChild(fireSpr);
                 fireSpr->setPosition(epicFire->getPosition());
-                if (m_level->m_isEpic == 1) {
+                if (state == GJFeatureState::Epic) {
                     fireSpr->setPositionY(fireSpr->getPositionY() + 16.875);
                 } else {
                     fireSpr->setPositionY(fireSpr->getPositionY() + 15.875);
