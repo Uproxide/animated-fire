@@ -10,7 +10,6 @@ add_library(${PROJECT_NAME} SHARED
     src/hooks/GJDifficultySprite.cpp
     src/hooks/LevelCell.cpp
     src/hooks/LevelInfoLayer.cpp
-    src/ui/FireSprite.cpp
     # Add any extra C++ source files here
 )
 
