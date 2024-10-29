@@ -12,9 +12,8 @@ class $modify(GJDifficultySprite) {
     void updateDifficultyFrame(int difficulty, GJDifficultyName name) {
         GJDifficultySprite::updateDifficultyFrame(difficulty, name);
 
-        auto fields = m_fields.self();
-        if (fields->m_fireSpr) {
-            fields->m_fireSpr->setPositionY(getContentHeight() / 2 + (m_featureState == GJFeatureState::Epic ? 16.875 : 15.875));
+        if (auto fireSpr = m_fields->m_fireSpr) {
+            fireSpr->setPositionY(getContentHeight() / 2 + (m_featureState == GJFeatureState::Epic ? 16.875 : 15.875));
         }
     }
 
@@ -54,9 +53,7 @@ class $modify(GJDifficultySprite) {
         }
 
         auto epicFire = getChildBySpriteFrameName(this, epicFrame);
-        if (epicFire) {
-            epicFire->setVisible(false);
-        }
+        if (epicFire) epicFire->setVisible(false);
 
         std::random_device rd;
         std::mt19937 gen(rd());
@@ -64,23 +61,19 @@ class $modify(GJDifficultySprite) {
         auto startFrame = dis(gen);
 
         auto spriteFrames = CCArray::create();
-        auto i = startFrame;
         auto spriteFrameCache = CCSpriteFrameCache::get();
+        auto i = startFrame;
         while (true) {
-            if (i == 8) {
-                i = 1;
-            } else {
-                i++;
-            }
             spriteFrames->addObject(spriteFrameCache->spriteFrameByName(fmt::format("{}Frame_{:02}.png"_spr, firePrefix, i).c_str()));
+            i = i == 8 ? 1 : i + 1;
             if (i == startFrame) break;
         }
 
         fields->m_fireSpr = CCSprite::createWithSpriteFrame(static_cast<CCSpriteFrame*>(spriteFrames->objectAtIndex(0)));
-        fields->m_fireSpr->setPosition(getContentSize() / 2 + CCPoint { 0.f, m_featureState == GJFeatureState::Epic ? 16.875f : 15.875f });
+        fields->m_fireSpr->setPosition(getContentSize() / 2 + CCPoint { 0.f, state == GJFeatureState::Epic ? 16.875f : 15.875f });
         fields->m_fireSpr->setScale(epicFire ? epicFire->getScale() : 1.f);
         fields->m_fireSpr->setID("animated-fire-sprite"_spr);
-        addChild(fields->m_fireSpr, -1);
         fields->m_fireSpr->runAction(CCRepeatForever::create(CCAnimate::create(CCAnimation::createWithSpriteFrames(spriteFrames, 1/12.f))));
+        addChild(fields->m_fireSpr, -1);
     }
 };
