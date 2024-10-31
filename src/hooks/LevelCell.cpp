@@ -22,7 +22,7 @@ class $modify(MyLevelCell, LevelCell) {
 
         if (!Loader::get()->isModLoaded("cdc.level_thumbnails")) return;
 
-        queueInMainThread([this, difficultyNode, difficultySpr] {
+        queueInMainThread([this, difficultyNode, difficultySpr, level] {
             if (!getParent() || !typeinfo_cast<DailyLevelNode*>(getParent())) return;
 
             auto fireSprite = difficultyNode->getChildByID("animated-fire-sprite"_spr);
@@ -44,7 +44,11 @@ class $modify(MyLevelCell, LevelCell) {
                 clippingNode->setStencil(CCLayerColor::create(
                     {0, 0, 0, 255},
                     fireSprite->getContentWidth(),
-                    fireSprite->getContentHeight() / 2 + bgNode->getContentHeight() - difficultyNode->getPositionY() - clippingNode->getPositionY() - 6.625f
+                    fireSprite->getContentHeight() / 2
+                        + bgNode->getContentHeight()
+                        - difficultyNode->getPositionY()
+                        - clippingNode->getPositionY()
+                        - 6.0f - (level->m_coins > 0 ? 9.0f : 0.0f)
                 ));
             }
 
