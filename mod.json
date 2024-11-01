@@ -8,9 +8,10 @@
 	},
 	"id": "uproxide.animated_fire",
 	"name": "Animated Fire",
-	"version": "v1.0.2",
+	"version": "v1.1.0",
 	"developers": [
 		"Uproxide",
+		"hiimjustin00",
 		"Brift"
 	],
 	"description": "Makes the Epic, Legendary and Mythic fires animated!",
@@ -42,7 +43,7 @@
 	], 
 	"links": {
 		"community": "https://discord.gg/uproxide-s-little-land-1204580412299542608",
-		"homepage": "https://uproxide.xyz",
+		"homepage": "https://uproxide.glungus.xyz",
 		"source": "https://github.com/uproxide/animated-fire"
 	}
 }
