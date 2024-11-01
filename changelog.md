@@ -1,3 +1,9 @@
+# 1.1.0
+- Rewrite (Thanks Justin! again!)
+  - Grandpa Demon Support
+  - Fake Rate Support (Fully)
+- Remove Roxibrine
+  
 # 1.0.2
 - Fix Fake Rate (Thanks Justin!)
   
