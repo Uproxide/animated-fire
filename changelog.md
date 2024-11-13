@@ -1,5 +1,7 @@
 # 1.1.1
  - Port to Geode 4.0.0-alpha.1
+ - Remove MacOS for the time being.
+   
 # 1.1.0
 - Rewrite (Thanks Justin! again!)
   - Grandpa Demon Support
