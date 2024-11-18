@@ -1,3 +1,7 @@
+# 1.1.2
+ - Port to Geode 4.0.0-beta.1
+ - MacOS (Hopefully)
+   
 # 1.1.1
  - Port to Geode 4.0.0-alpha.1
  - Remove MacOS for the time being.
