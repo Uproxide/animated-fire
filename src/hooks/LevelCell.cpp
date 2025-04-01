@@ -25,7 +25,7 @@ class $modify(MyLevelCell, LevelCell) {
         auto hasCoins = level->m_coins > 0;
         auto parent = getParent();
         queueInMainThread([parent = Ref<CCNode>(parent), difficultyNode, difficultySpr, hasCoins] {
-            if (!typeinfo_cast<DailyLevelNode*>(parent)) return;
+            if (!typeinfo_cast<DailyLevelNode*>(parent.data())) return;
 
             auto fireSprite = difficultyNode->getChildByID("animated-fire-sprite"_spr);
             if (!fireSprite) {
