@@ -1,3 +1,6 @@
+# 1.1.4
+ - JIT-less iOS
+
 # 1.1.2
  - Port to Geode 4.0.0-beta.1
  - MacOS (Hopefully)
