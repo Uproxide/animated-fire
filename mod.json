@@ -1,14 +1,14 @@
 {
-	"geode": "4.10.0",
+	"geode": "5.0.0-beta.1",
 	"gd": {
-		"win": "2.2074",
-		"mac": "2.2074",
-		"android": "2.2074",
-		"ios": "2.2074"
+		"win": "2.2081",
+		"mac": "2.2081",
+		"android": "2.2081",
+		"ios": "2.2081"
 	},
 	"id": "uproxide.animated_fire",
 	"name": "Animated Fire",
-	"version": "v1.1.4",
+	"version": "v1.1.5",
 	"developers": [
 		"Uproxide",
 		"hiimjustin00",
@@ -31,13 +31,9 @@
 			"resources/example.png"
 		]
 	},
-	"dependencies": [
-		{
-			"id": "geode.node-ids",
-			"version": ">=1.12.1",
-			"importance": "required"
-		}
-	],
+	"dependencies": {
+		"geode.node-ids": ">=1.22.0"
+	},
 	"tags": [
 		"interface", "enhancement", "customization"
 	], 

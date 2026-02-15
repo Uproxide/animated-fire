@@ -1,3 +1,6 @@
+# 1.1.5
+ * Geode 5.0.0-beta.1 / Geometry Dash 2.208 Support
+
 # 1.1.4
  - JIT-less iOS
 
