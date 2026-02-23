@@ -7,7 +7,7 @@ Makes the Epic, Legendary and Mythic fires animated!
 # Credits
 - Uproxide
 - Brift
-- hiimjustin00 (Pretty Much rewrote it lmbao)
+- hiimjasmine00 (Pretty Much rewrote it lmbao)
 - ShineUA (Clipping Node on Level Cell)
 - Cooper (help with sprite animations)
 
