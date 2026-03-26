@@ -27,11 +27,13 @@
 				"resources/MythicSheet/*.png"
 			]
 		},
-		"files": [
-			"resources/example.png",
+		"sprites": [
 			"resources/EpicSheet/*.gif",
 			"resources/LegendarySheet/*.gif",
 			"resources/MythicSheet/*.gif"
+		],
+		"files": [
+			"resources/example.png"
 		]
 	},
 	"dependencies": {

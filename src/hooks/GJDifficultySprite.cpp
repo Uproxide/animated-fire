@@ -55,11 +55,11 @@ class $modify(GJDifficultySprite) {
         auto epicFire = getChildBySpriteFrameName(this, epicFrame);
         if (epicFire) epicFire->setVisible(false);
 
-        /*std::random_device rd;
+        std::random_device rd;
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> dis(1, 8);
         auto startFrame = dis(gen);
-
+        auto spriteFrameCache = CCSpriteFrameCache::get();
         auto spriteFrames = CCArray::create();
         
         auto i = startFrame;
@@ -67,14 +67,15 @@ class $modify(GJDifficultySprite) {
             spriteFrames->addObject(spriteFrameCache->spriteFrameByName(fmt::format("{}Frame_{:02}.png"_spr, firePrefix, i).c_str()));
             i = i == 8 ? 1 : i + 1;
             if (i == startFrame) break;
-        }*/
-        //auto spriteFrameCache = CCSpriteFrameCache::get();
+        }
+        
         //log::info("Creating fire sprite with frame: {}", spriteFrameCache->spriteFrameByName(fmt::format("{}Fire.gif"_spr, firePrefix).c_str()));
-        fields->m_fireSpr = CCSprite::create(fmt::format("{}Fire.gif"_spr, firePrefix).c_str());
+        //fields->m_fireSpr = CCSprite::create(fmt::format("{}Fire.gif"_spr, firePrefix).c_str()); naomi, once you figure out how to make the gifs HD and SD uncomment this thx :3
+        fields->m_fireSpr = CCSprite::createWithSpriteFrame(static_cast<CCSpriteFrame*>(spriteFrames->objectAtIndex(0)));
         fields->m_fireSpr->setPosition(getContentSize() / 2 + CCPoint { 0.f, state == GJFeatureState::Epic ? 16.875f : 15.875f });
         fields->m_fireSpr->setScale(epicFire ? epicFire->getScale() : 1.f);
         fields->m_fireSpr->setID("animated-fire-sprite"_spr);
-        //fields->m_fireSpr->runAction(CCRepeatForever::create(CCAnimate::create(CCAnimation::createWithSpriteFrames(spriteFrames, 1/12.f))));
+        fields->m_fireSpr->runAction(CCRepeatForever::create(CCAnimate::create(CCAnimation::createWithSpriteFrames(spriteFrames, 1/12.f))));
         addChild(fields->m_fireSpr, -1);
 
          
