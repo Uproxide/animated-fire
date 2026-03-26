@@ -1,3 +1,6 @@
+# 1.2.1
+ * revert gif change for now
+ 
 # 1.2.0
  * Change Fire Sprites to .gifs
  * VERY MUCH SO HOPEFULLY fix a crash that has been pestering this mod since 1.1.0
