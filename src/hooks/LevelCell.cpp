@@ -22,8 +22,13 @@ class $modify(MyLevelCell, LevelCell) {
 
         if (!Loader::get()->isModLoaded("cdc.level_thumbnails")) return;
 
-        queueInMainThread([this, difficultyNode, difficultySpr, level] {
-            if (!getParent() || !typeinfo_cast<DailyLevelNode*>(getParent())) return;
+        auto self = geode::WeakRef(this);
+
+        queueInMainThread([self, difficultyNode, difficultySpr, level] {
+            auto node = self.lock();
+
+            if (!node) return;
+            if (!node->getParent() || !typeinfo_cast<DailyLevelNode*>(node->getParent())) return;
 
             auto fireSprite = difficultyNode->getChildByID("animated-fire-sprite"_spr);
             if (!fireSprite) {
@@ -40,7 +45,7 @@ class $modify(MyLevelCell, LevelCell) {
             clippingNode->setPosition(fireSprite->getPosition());
             clippingNode->setScale(fireSprite->getScale());
 
-            if (auto bgNode = static_cast<CCScale9Sprite*>(getParent()->getChildByID("background"))) {
+            if (auto bgNode = static_cast<CCScale9Sprite*>(node->getParent()->getChildByID("background"))) {
                 clippingNode->setStencil(CCLayerColor::create(
                     {0, 0, 0, 255},
                     fireSprite->getContentWidth(),

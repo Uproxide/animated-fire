@@ -1,5 +1,5 @@
 {
-	"geode": "5.0.0-beta.1",
+	"geode": "5.4.1",
 	"gd": {
 		"win": "2.2081",
 		"mac": "2.2081",
@@ -8,7 +8,7 @@
 	},
 	"id": "uproxide.animated_fire",
 	"name": "Animated Fire",
-	"version": "v1.1.5",
+	"version": "v1.2.0",
 	"developers": [
 		"Uproxide",
 		"hiimjustin00",
@@ -28,18 +28,22 @@
 			]
 		},
 		"files": [
-			"resources/example.png"
+			"resources/example.png",
+			"resources/EpicSheet/*.gif",
+			"resources/LegendarySheet/*.gif",
+			"resources/MythicSheet/*.gif"
 		]
 	},
 	"dependencies": {
-		"geode.node-ids": ">=1.22.0"
+		"geode.node-ids": ">=1.22.0",
+		"prevter.imageplus": ">=1.1.0"
 	},
 	"tags": [
 		"interface", "enhancement", "customization"
 	], 
 	"links": {
 		"community": "https://discord.gg/uproxide-s-little-land-1204580412299542608",
-		"homepage": "https://uproxide.glungus.xyz",
+		"homepage": "https://roxi.gay/",
 		"source": "https://github.com/uproxide/animated-fire"
 	}
 }

@@ -1,3 +1,7 @@
+# 1.2.0
+ * Change Fire Sprites to .gifs
+ * VERY MUCH SO HOPEFULLY fix a crash that has been pestering this mod since 1.1.0
+
 # 1.1.5
  * Geode 5.0.0-beta.1 / Geometry Dash 2.208 Support
 
