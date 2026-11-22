@@ -1,3 +1,7 @@
+# 1.2.2
+ * support for 2.209
+ * removed evil uproxide
+
 # 1.2.1
  * revert gif change for now
  
