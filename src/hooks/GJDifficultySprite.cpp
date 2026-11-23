@@ -5,14 +5,10 @@
 using namespace geode::prelude;
 
 class $modify(GJDifficultySprite) {
-    struct Fields {
-        CCSprite* m_fireSpr;
-    };
-
     void updateDifficultyFrame(int difficulty, GJDifficultyName name) {
         GJDifficultySprite::updateDifficultyFrame(difficulty, name);
 
-        if (auto fireSpr = m_fields->m_fireSpr) {
+        if (auto fireSpr = this->getChildByID("animated-fire-sprite"_spr)) {
             fireSpr->setPositionY(getContentHeight() / 2 + (m_featureState == GJFeatureState::Epic ? 16.875 : 15.875));
         }
     }
@@ -23,10 +19,9 @@ class $modify(GJDifficultySprite) {
             return;
         }
 
-        auto fields = m_fields.self();
-        if (fields->m_fireSpr) {
-            fields->m_fireSpr->removeFromParent();
-            fields->m_fireSpr = nullptr;
+        if (auto fireSpr = this->getChildByID("animated-fire-sprite"_spr)) {
+            fireSpr->removeFromParent();
+            fireSpr = nullptr;
         }
 
         GJDifficultySprite::updateFeatureState(state);
@@ -68,15 +63,15 @@ class $modify(GJDifficultySprite) {
             i = i == 8 ? 1 : i + 1;
             if (i == startFrame) break;
         }
-        
+
         //log::info("Creating fire sprite with frame: {}", spriteFrameCache->spriteFrameByName(fmt::format("{}Fire.gif"_spr, firePrefix).c_str()));
         //fields->m_fireSpr = CCSprite::create(fmt::format("{}Fire.gif"_spr, firePrefix).c_str()); naomi, once you figure out how to make the gifs HD and SD uncomment this thx :3
-        fields->m_fireSpr = CCSprite::createWithSpriteFrame(static_cast<CCSpriteFrame*>(spriteFrames->objectAtIndex(0)));
-        fields->m_fireSpr->setPosition(getContentSize() / 2 + CCPoint { 0.f, state == GJFeatureState::Epic ? 16.875f : 15.875f });
-        fields->m_fireSpr->setScale(epicFire ? epicFire->getScale() : 1.f);
-        fields->m_fireSpr->setID("animated-fire-sprite"_spr);
-        fields->m_fireSpr->runAction(CCRepeatForever::create(CCAnimate::create(CCAnimation::createWithSpriteFrames(spriteFrames, 1/12.f))));
-        addChild(fields->m_fireSpr, -1);
+        auto fireSpr = CCSprite::createWithSpriteFrame(static_cast<CCSpriteFrame*>(spriteFrames->objectAtIndex(0)));
+        fireSpr->setPosition(getContentSize() / 2 + CCPoint { 0.f, state == GJFeatureState::Epic ? 16.875f : 15.875f });
+        fireSpr->setScale(epicFire ? epicFire->getScale() : 1.f);
+        fireSpr->setID("animated-fire-sprite"_spr);
+        fireSpr->runAction(CCRepeatForever::create(CCAnimate::create(CCAnimation::createWithSpriteFrames(spriteFrames, 1/12.f))));
+        addChild(fireSpr, -1);
 
          
     }

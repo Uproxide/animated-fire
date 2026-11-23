@@ -1,3 +1,6 @@
+# 1.2.3
+ * Support for macOS and iOS on 2.2091
+
 # 1.2.2
  * support for 2.209
  * removed evil uproxide
